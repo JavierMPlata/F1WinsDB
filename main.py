@@ -1,10 +1,11 @@
 from Extract.F1WinsExtract import f1dbExtract
 from Limpieza.F1WinsClean import F1WinnersClean
+from Config.Config import Config
 
 # Extracción de datos
 print("EXTRAYENDO DATOS...")
 print("=" * 50)
-response1 = f1dbExtract(r"F1Wins.csv")
+response1 = f1dbExtract(Config.INPUT_PATH)
 response1.queries()
 
 print("Primeras 5 filas de los datos extraídos:")
@@ -34,3 +35,6 @@ print(f"Tipos de datos:")
 print(cleaned_data.dtypes)
 print(f"\nValores nulos finales:")
 print(cleaned_data.isnull().sum())
+
+# Guardar datos limpios en CSV
+cleaned_data.to_csv(Config.OUTPUT_PATH, index=False)
