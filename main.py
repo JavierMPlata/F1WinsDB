@@ -1,5 +1,6 @@
 from Extract.F1WinsExtract import f1dbExtract
-from Limpieza.F1WinsClean import F1WinnersClean
+from Transform.F1WinsClean import F1WinnersClean
+from Load.F1WinsLoad import Loader
 from Config.Config import Config
 
 # Extracción de datos
@@ -36,5 +37,6 @@ print(cleaned_data.dtypes)
 print(f"\nValores nulos finales:")
 print(cleaned_data.isnull().sum())
 
-# Guardar datos limpios en CSV
-cleaned_data.to_csv(Config.OUTPUT_PATH, index=False)
+# Carga de datos
+loader = Loader(cleaned_data)
+loader.to_sqlite()
